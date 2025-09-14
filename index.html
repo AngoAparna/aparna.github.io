@@ -1,409 +1,451 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Millatte — Sugar-free Refreshments</title>
-  <meta name="description" content="Millatte — sugar-free matcha & refreshing beverages. Order via WhatsApp." />
-  <style>
-    :root{
-      --accent:#16a34a;
-      --muted:#64748b;
-      --card:#ffffff;
-      --glass: rgba(255,255,255,0.10);
-      --shadow: 0 10px 30px rgba(2,6,23,0.12);
-      font-synthesis: none;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      color:#04283a;
-      background:linear-gradient(180deg,#f8fafc,#eef2ff);
-      -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale;
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Millatte — Matcha & Refreshing Drinks</title>
+<meta name="description" content="Millatte — sugar-free matcha bottled, natural & refreshing" />
+<style>
+  :root{
+    --accent:#16a34a;
+    --muted:#475569;
+    --glass: rgba(255,255,255,0.08);
+    --card:#ffffff;
+    --radius:14px;
+    --shadow: 0 12px 30px rgba(2,6,23,0.12);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%;margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica;background:linear-gradient(180deg,#fffefc,#f0f8ff);color:#04283a}
+  a{color:var(--accent)}
+  /* -------- hero & parallax sections -------- */
+  .hero{
+    position:relative;height:62vh;min-height:420px;overflow:hidden;display:flex;align-items:center;
+    justify-content:flex-start;padding:48px;
+    color:#fff;
+    background:linear-gradient(180deg,rgba(0,0,0,0.18),rgba(0,0,0,0.28));
+  }
+  .hero video, .hero img {
+    position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;filter:brightness(0.6) saturate(1.05);
+  }
+  .hero .content{position:relative;z-index:2;max-width:860px}
+  .mark{width:58px;height:58px;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#06b6d4);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900}
+  h1{font-size:38px;margin:8px 0 6px;line-height:1.02}
+  p.lead{opacity:0.95;max-width:60%;margin:0 0 12px;color:rgba(255,255,255,0.95)}
+  .hero-cta{display:flex;gap:12px}
+  .btn{background:var(--accent);color:#fff;padding:12px 16px;border-radius:12px;border:none;cursor:pointer;font-weight:800;box-shadow:var(--shadow)}
+  .btn.ghost{background:transparent;border:1.5px solid rgba(255,255,255,0.18);color:#fff}
 
-    /* HERO */
-    .hero-wrap{position:relative;overflow:hidden;height:56vh;min-height:380px;border-bottom-left-radius:28px;border-bottom-right-radius:28px}
-    .hero-video{
-      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.6) saturate(1.05);
-    }
-    .hero-overlay{
-      position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:48px;gap:12px;
-      color:#fff;
-      background: linear-gradient(180deg, rgba(2,6,23,0.12), rgba(2,6,23,0.18));
-      backdrop-filter: blur(2px);
-    }
-    .logo{display:flex;gap:12px;align-items:center}
-    .logo .mark{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:20px}
-    .brand{font-size:28px;font-weight:800;letter-spacing:0.2px}
-    .hero-sub{font-size:15px;color:rgba(255,255,255,0.9);max-width:60%}
-    .hero-cta{display:flex;gap:12px;margin-top:8px}
-    .btn{background:var(--accent);color:#fff;border:none;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:var(--shadow)}
-    .btn.secondary{background:transparent;border:1.5px solid rgba(255,255,255,0.14);color:#fff}
+  /* container */
+  .wrap{max-width:1150px;margin:-64px auto 40px;padding:0 20px}
 
-    /* MAIN */
-    .wrap{max-width:1100px;margin:-64px auto 40px;padding:0 20px}
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:22px}
-    @media(max-width:980px){ .grid{grid-template-columns:1fr} .hero-overlay{padding:22px} .hero-sub{max-width:100%} }
+  .grid{display:grid;grid-template-columns:1fr 380px;gap:22px}
+  @media(max-width:980px){ .grid{grid-template-columns:1fr} .hero p.lead{max-width:100%} }
 
-    .card{background:var(--card);border-radius:14px;padding:16px;box-shadow:0 6px 22px rgba(8,21,42,0.06)}
-    .about{display:flex;gap:16px;align-items:center}
-    .about .left{flex:1}
-    .about .right{width:160px;height:120px;border-radius:12px;overflow:hidden}
-    .about .right img{width:100%;height:100%;object-fit:cover}
+  .card{background:var(--card);border-radius:12px;padding:16px;box-shadow:0 10px 26px rgba(8,21,42,0.06)}
+  .about{display:flex;gap:16px;align-items:center}
+  .about img{width:160px;height:120px;object-fit:cover;border-radius:10px}
 
-    /* Product grid */
-    .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:14px}
-    .product{
-      border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fff,#fbfeff);transition:transform .18s ease, box-shadow .18s ease;
-      box-shadow:0 6px 18px rgba(6,10,28,0.05); display:flex;flex-direction:column;
-    }
-    .product:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(6,10,28,0.12)}
-    .product .thumb{height:160px;background:#f1f5f9;display:flex;align-items:center;justify-content:center}
-    .product img{width:100%;height:100%;object-fit:cover;display:block}
-    .p-body{padding:12px;flex:1;display:flex;flex-direction:column}
-    .p-title{font-weight:800;font-size:16px}
-    .p-tag{color:var(--muted);font-size:13px;margin-top:6px}
-    .p-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
-    .price{font-weight:800}
+  .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;margin-top:14px}
+  .product{border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fff,#fbfeff);transition:transform .16s,box-shadow .16s}
+  .product:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(6,10,28,0.12)}
+  .thumb{height:160px;background:#f3f7fb;display:flex;align-items:center;justify-content:center}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .p-body{padding:12px}
+  .p-title{font-weight:800}
+  .p-tag{color:var(--muted);font-size:13px;margin-top:6px}
+  .p-row{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
 
-    /* Sidebar */
-    .sidebar .bot{margin-bottom:14px}
-    .bot-input{display:flex;gap:8px;margin-top:8px}
-    .bot-messages{height:130px;overflow:auto;padding:8px;border-radius:10px;background:#f8fafc;border:1px solid rgba(2,6,23,0.03)}
-    .cart{margin-top:12px}
-    .cart-list{max-height:240px;overflow:auto}
+  /* sidebar */
+  .sidebar .bot-messages{height:140px;overflow:auto;background:#f8fafc;padding:8px;border-radius:10px;border:1px solid rgba(2,6,23,0.03)}
+  .cart-list{max-height:260px;overflow:auto}
 
-    /* recommendations */
-    .recs{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
-    .rec{background:linear-gradient(180deg,#fff,#f8fffb);padding:8px;border-radius:10px;box-shadow:0 6px 18px rgba(6,10,28,0.04)}
+  .recs{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+  .rec{background:#fff;padding:8px;border-radius:10px;box-shadow:0 8px 24px rgba(6,10,28,0.04)}
 
-    .footer{margin-top:28px;text-align:center;color:#334155;font-size:13px}
+  .footer{margin-top:28px;text-align:center;color:#334155;font-size:13px}
 
-    /* small UI */
-    .muted{color:var(--muted)}
-    a.download{display:inline-block;margin-top:8px;padding:8px 10px;background:#0ea5e9;color:white;border-radius:10px;text-decoration:none}
+  /* PARALLAX life-cycle sections */
+  .life{
+    margin-top:28px;border-radius:12px;overflow:hidden;
+    display:grid;grid-template-columns:1fr;gap:0;
+  }
+  .life .step{
+    position:relative;min-height:240px;color:#fff;display:flex;align-items:center;padding:28px;
+    background-size:cover;background-position:center;
+  }
+  .life .step .inner{max-width:860px;background:linear-gradient(90deg,rgba(0,0,0,0.15),rgba(0,0,0,0.15));padding:18px;border-radius:10px}
+  .life .step:nth-child(odd){background-attachment:fixed}
+  @media(max-width:720px){ .life .step{background-attachment:scroll} }
 
-  </style>
+  /* small tweaks */
+  .muted{color:var(--muted)}
+  .small{font-size:13px;color:var(--muted)}
+  .download-btn{display:inline-block;margin-top:8px;padding:8px 10px;background:#0ea5e9;color:white;border-radius:10px;text-decoration:none}
+
+</style>
 </head>
 <body>
-  <!-- HERO with looping background video + overlay -->
-  <section class="hero-wrap">
-    <!-- sample mp4 from MDN (works reliably). Replace with a higher-res waterfall / fresh people video if you want -->
-    <video class="hero-video" autoplay muted loop playsinline>
-      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
-      <!-- Fallback image -->
-      <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=60" alt="freshness">
-    </video>
 
-    <div class="hero-overlay">
-      <div class="logo">
-        <div class="mark">M</div>
-        <div>
-          <div style="font-weight:800;font-size:20px">Millatte</div>
-          <div style="font-size:12px;color:rgba(255,255,255,0.9)">Sugar-free • Refreshing • Bottled Matcha</div>
-        </div>
-      </div>
+<!-- HERO (video/image) -->
+<section class="hero" id="top">
+  <!-- sample hero video: change URL to a waterfall/video of people if you want; this is a small safe demo mp4 -->
+  <video autoplay muted loop playsinline class="hero-media">
+    <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+  </video>
+  <div class="hero-overlay" style="position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,6,23,0.15),rgba(2,6,23,0.28));z-index:0"></div>
 
-      <h1 style="margin:8px 0 0;font-size:34px;line-height:1.02;font-weight:900">Fresh. Sugar-free. Made for Gen-Z.</h1>
-      <p class="hero-sub">Millatte crafts crisp, sugar-free bottled matcha and refreshing drinks — taste the calm energy. Affordable. Healthy. Instant mood-lift.</p>
-
-      <div class="hero-cta">
-        <button class="btn" id="shopNow">Shop products</button>
-        <button class="btn secondary" id="learnMore">Our story</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- MAIN content -->
-  <div class="wrap">
-    <div class="grid">
+  <div class="content" style="position:relative;z-index:2">
+    <div style="display:flex;gap:14px;align-items:center">
+      <div class="mark">M</div>
       <div>
-        <div class="card about">
-          <div class="left">
-            <h2 style="margin:0">Why Millatte?</h2>
-            <p class="muted">A health-forward beverage brand focused on sugar-free options, crafted matcha bottle, and refreshing natural flavours. Perfect for students, creators and anyone who wants energy without the crash.</p>
-            <ul class="muted" style="margin-top:8px">
-              <li>Zero sugar / low-cal where applicable</li>
-              <li>Affordable pricing</li>
-              <li>Refreshing taste & premium ingredients</li>
-            </ul>
-          </div>
-          <div class="right">
-            <!-- dynamic hero image (Unsplash) -->
-            <img src="https://source.unsplash.com/400x300/?matcha,drink" alt="matcha" />
-          </div>
+        <div style="font-weight:800;font-size:18px">Millatte</div>
+        <div style="font-size:12px;opacity:0.95">Sugar-free • Natural matcha • Refreshing</div>
+      </div>
+    </div>
+
+    <h1>Fresh matcha, bottled for your best moments</h1>
+    <p class="lead">From farm to cup — real matcha crafted to be sugar-free, refreshing and affordable. Taste the freshness — instant calm, clean energy.</p>
+    <div class="hero-cta">
+      <button class="btn" id="shopNowBtn">Shop products</button>
+      <button class="btn ghost" id="storyBtn">Life cycle of matcha</button>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN wrap -->
+<div class="wrap">
+
+  <div class="grid">
+    <main>
+      <div class="card about">
+        <div style="flex:1">
+          <h2 style="margin:0">Why Millatte?</h2>
+          <p class="muted">Natural ceremonial matcha, bottled responsibly. Sugar-free options for conscious energy and daily refreshment.</p>
+          <ul class="muted" style="margin-top:8px">
+            <li>Real tea leaves, stone-ground matcha</li>
+            <li>No added sugar, no artificial colors</li>
+            <li>Crafted to be affordable and delicious</li>
+          </ul>
         </div>
+        <div><img src="https://source.unsplash.com/400x300/?matcha,tea" alt="matcha" /></div>
+      </div>
 
-        <div class="card" style="margin-top:14px">
-          <h3 style="margin:0">Products</h3>
+      <div class="card" style="margin-top:18px">
+        <h3 style="margin:0">Products</h3>
+        <div id="productGrid" class="product-grid"></div>
+      </div>
 
-          <!-- product grid: images pulled from Unsplash by keyword (auto) -->
-          <div class="product-grid" id="productGrid">
-            <!-- JS will populate -->
-          </div>
-        </div>
+      <div class="life" id="lifeCycle">
+        <!-- life-cycle steps populated by JS (images from Unsplash) -->
+      </div>
 
-        <div class="card" style="margin-top:14px">
-          <h3 style="margin:0">Recommended for you</h3>
-          <div id="recList" class="recs"></div>
+      <div class="card" style="margin-top:18px">
+        <h3 style="margin:0">Recommended for you</h3>
+        <div id="recList" class="recs"></div>
+      </div>
+
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar card">
+      <div>
+        <h4 style="margin:0">Help Bot</h4>
+        <div id="botMessages" class="bot-messages" style="margin-top:10px"></div>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <input id="botInput" placeholder="Ask e.g. is this sugar free?" style="flex:1;padding:10px;border-radius:10px;border:1px solid #eef2ff" />
+          <button id="botSend" class="btn">Ask</button>
         </div>
       </div>
 
-      <!-- SIDEBAR -->
-      <aside class="card sidebar">
-        <div class="bot">
-          <h4 style="margin:0">Help Bot</h4>
-          <div id="botMessages" class="bot-messages" style="margin-top:10px"></div>
-          <div class="bot-input">
-            <input id="botInput" placeholder="Ask a question (try: is this sugar free?)" style="flex:1;padding:10px;border-radius:10px;border:1px solid #eef2ff" />
-            <button class="btn" id="botSend">Ask</button>
-          </div>
-        </div>
+      <div style="margin-top:16px">
+        <h4 style="margin:0">Cart</h4>
+        <div id="cartList" class="cart-list muted" style="margin-top:8px">Cart is empty</div>
 
-        <div class="card" style="padding:12px">
-          <h4 style="margin:0">Cart</h4>
-          <div id="cartList" class="cart-list muted" style="margin-top:8px">Cart is empty</div>
-
-          <hr style="margin:12px 0" />
-          <form id="checkoutForm">
-            <input name="name" placeholder="Name" style="width:100%;padding:10px;margin-bottom:8px;border-radius:10px;border:1px solid #eef2ff" />
-            <input name="phone" placeholder="Phone (9198...)" style="width:100%;padding:10px;margin-bottom:8px;border-radius:10px;border:1px solid #eef2ff" />
-            <textarea name="address" placeholder="Address" style="width:100%;padding:10px;margin-bottom:8px;border-radius:10px;border:1px solid #eef2ff"></textarea>
-            <button type="submit" class="btn" style="width:100%">Place order (WhatsApp)</button>
-          </form>
-
-          <a id="downloadOrders" class="download" href="#" download="millatte-orders.csv" style="display:block;text-align:center">Download orders CSV</a>
-        </div>
-      </aside>
-    </div>
-
-    <div class="footer">© Millatte — Healthy beverages • Sugar-free • Matcha bottled</div>
+        <hr style="margin:12px 0" />
+        <form id="checkoutForm">
+          <input name="name" placeholder="Name" style="width:100%;padding:10px;margin-bottom:8px;border-radius:10px;border:1px solid #eef2ff" />
+          <input name="phone" placeholder="Phone (e.g. 9198...)" style="width:100%;padding:10px;margin-bottom:8px;border-radius:10px;border:1px solid #eef2ff" />
+          <textarea name="address" placeholder="Address" style="width:100%;padding:10px;margin-bottom:8px;border-radius:10px;border:1px solid #eef2ff"></textarea>
+          <button type="submit" class="btn" style="width:100%">Place order (WhatsApp)</button>
+        </form>
+        <a id="downloadOrders" class="download-btn" href="#" download="millatte-orders.csv">Download orders CSV</a>
+      </div>
+    </aside>
   </div>
 
-  <script>
-  /******************************
-   * Millatte — interactive script
-   * - visuals: Unsplash images + sample hero video
-   * - WhatsApp + Google Form submission wired
-   ******************************/
+  <div class="footer">© Millatte — Natural matcha bottled • Sugar-free • Refreshing</div>
+</div>
 
-  // YOUR CONFIG (already set)
-  const BUSINESS_WHATSAPP_NUMBER = "917093902898";
-  const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeFiBBhdIaI6b2mbdn_YOBrYOTDpJp3qhhw4F_2xbwT4vYTMQ/formResponse";
-  const GOOGLE_FORM_FIELDS = {
-    orderId: "entry.1054609344",
-    name:    "entry.1099864676",
-    phone:   "entry.2119019468",
-    address: "entry.441643550",
-    total:   "entry.1445951231",
-    cart:    "entry.1346159692",
-    createdAt: "entry.203310628"
-  };
+<script>
+/* ---------------------------
+   CONFIG (already set for you)
+   --------------------------- */
+const BUSINESS_WHATSAPP_NUMBER = "917093902898"; // country code + number (no +)
+const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeFiBBhdIaI6b2mbdn_YOBrYOTDpJp3qhhw4F_2xbwT4vYTMQ/formResponse";
+const GOOGLE_FORM_FIELDS = {
+  orderId: "entry.1054609344",
+  name:    "entry.1099864676",
+  phone:   "entry.2119019468",
+  address: "entry.441643550",
+  total:   "entry.1445951231",
+  cart:    "entry.1346159692",
+  createdAt: "entry.203310628"
+};
 
-  // Products (images load dynamically from Unsplash by keyword)
-  const PRODUCTS = [
-    { id: "p_matcha_01", name: "Iced Matcha Bottle", tagline: "Silky ceremonial matcha — sugar-free & calm.", price: 140, query: "matcha,bottle" },
-    { id: "p_citrus_01", name: "Citrus Spark", tagline: "Zesty, vitamin-rich & refreshing.", price: 90, query: "citrus,drink" },
-    { id: "p_herbal_01", name: "Herbal Chill", tagline: "Calming herbal infusion — natural flavors.", price: 95, query: "herbal,tea" },
-    { id: "p_mint_01", name: "Mint Breeze", tagline: "Crisp mint, zero sugar.", price: 85, query: "mint,drink" }
-  ];
+/* ---------------------------
+   PRODUCTS (with image queries)
+   --------------------------- */
+const PRODUCTS = [
+  { id: "p_matcha_01", name: "Iced Matcha Bottle", tagline: "Silky ceremonial matcha — sugar-free & calm.", price: 140, query: "matcha,bottle" },
+  { id: "p_citrus_01", name: "Citrus Spark", tagline: "Zesty, vitamin-rich & refreshing.", price: 90, query: "citrus,drink" },
+  { id: "p_herbal_01", name: "Herbal Chill", tagline: "Calming herbal infusion — natural flavors.", price: 95, query: "herbal,tea" },
+  { id: "p_mint_01", name: "Mint Breeze", tagline: "Crisp mint, zero sugar.", price: 85, query: "mint,drink" }
+];
 
-  const LS_ORDERS_KEY = "millatte_orders_v1";
-  const LS_CART_KEY = "millatte_cart_v1";
+const LS_ORDERS_KEY = 'millatte_orders_v1';
+const LS_CART_KEY = 'millatte_cart_v1';
 
-  // small helpers
-  const $ = id => document.getElementById(id);
-  function el(tag, cls, html){ const e = document.createElement(tag); if(cls) e.className = cls; if(html!=null) e.innerHTML = html; return e; }
-  function currency(n){ return "₹" + Number(n).toFixed(0) }
+/* ---------------------------
+   RENDER PRODUCTS
+   --------------------------- */
+function el(tag, cls, html){ const e = document.createElement(tag); if(cls) e.className = cls; if(html!=null) e.innerHTML = html; return e; }
+function $(id){ return document.getElementById(id) }
+function currency(n){ return '₹' + Number(n).toFixed(0) }
 
-  // render products with Unsplash images by query (auto fetch)
-  function renderProducts(){
-    const cont = document.getElementById("productGrid");
-    cont.innerHTML = "";
-    PRODUCTS.forEach(p=>{
-      const card = el("div","product");
-      const thumb = el("div","thumb");
-      const img = document.createElement("img");
-      // unsplash random by keyword (good visual variety). If you prefer fixed images, replace with your hosted images.
-      img.src = `https://source.unsplash.com/800x600/?${encodeURIComponent(p.query)}`;
-      img.alt = p.name;
-      thumb.appendChild(img);
-      const body = el("div","p-body");
-      body.innerHTML = `<div class="p-title">${p.name}</div><div class="p-tag">${p.tagline}</div>`;
-      const bottom = el("div","p-bottom");
-      bottom.innerHTML = `<div class="price">${currency(p.price)}</div><div><button class="btn" data-id="${p.id}">Add</button></div>`;
-      body.appendChild(bottom);
-      card.appendChild(thumb);
-      card.appendChild(body);
-      cont.appendChild(card);
-    });
-
-    // add click handlers
-    cont.querySelectorAll('button[data-id]').forEach(b=>{
-      b.addEventListener('click', ()=> {
-        const id = b.getAttribute('data-id');
-        const prod = PRODUCTS.find(x=>x.id===id);
-        addToCart(Object.assign({}, prod, { name: prod.name, price: prod.price, tags: prod.query.split(",") }));
-      });
-    });
-  }
-
-  // CART
-  function loadCart(){ try{ return JSON.parse(localStorage.getItem(LS_CART_KEY) || "[]") }catch(e){return []} }
-  function saveCart(cart){ localStorage.setItem(LS_CART_KEY, JSON.stringify(cart)); renderCart(); renderRecs(); updateDownloadLink(); }
-  function addToCart(product){
-    const cart = loadCart();
-    const idx = cart.findIndex(i=>i.id===product.id);
-    if(idx>=0){ cart[idx].qty += 1 } else { cart.push({...product, qty:1}) }
-    saveCart(cart);
-    recordActivity({ event:'add_to_cart', productId: product.id });
-  }
-  function removeFromCart(id){
-    let cart = loadCart();
-    cart = cart.filter(i=>i.id!==id);
-    saveCart(cart);
-  }
-  function renderCart(){
-    const cart = loadCart();
-    $('cartList').innerHTML = cart.length ? "" : "<div class='muted'>Cart is empty</div>";
-    $('cart-count').innerText = "Cart: "+cart.reduce((s,i)=>s+i.qty,0);
-    if(cart.length){
-      cart.forEach(item=>{
-        const d = el("div","cart-item");
-        d.innerHTML = `<div><div style="font-weight:700">${item.name}</div><div class="muted">${item.qty} × ${currency(item.price)}</div></div>
-          <div><button style="background:transparent;border:none;color:#ef4444;cursor:pointer" data-id="${item.id}">Remove</button></div>`;
-        $('cartList').appendChild(d);
-      });
-      $('cartList').querySelectorAll('button[data-id]').forEach(b=>b.addEventListener('click', ()=> removeFromCart(b.getAttribute('data-id'))));
-    }
-  }
-
-  // RECOMMENDATIONS (simple tag match)
-  function renderRecs(){
-    const recContainer = $('recList'); recContainer.innerHTML = "";
-    const cart = loadCart();
-    let recs = [];
-    if(cart.length){
-      const tags = new Set(cart.flatMap(c=>c.tags || []));
-      recs = PRODUCTS.filter(p => p.tags && p.tags.some(t=>tags.has(t)) && !cart.find(c=>c.id===p.id));
-    }
-    if(!recs.length) recs = PRODUCTS.slice(0,3);
-    recs.forEach(r=>{
-      const rEl = el('div','rec'); rEl.innerHTML = `<div style="font-weight:700">${r.name}</div><div class="muted">${currency(r.price)}</div>`;
-      recContainer.appendChild(rEl);
-    });
-  }
-
-  // BOT (keyword matching)
-  const FAQ = [
-    { q: 'is this sugar free', a: 'Yes — our products are sugar-free or low-cal where noted.' },
-    { q: 'do you deliver', a: 'We deliver across India. After you place order we will confirm on WhatsApp.' },
-    { q: 'how long matcha lasts', a: 'Unopened bottles: 6 months. Opened: refrigerate and consume within 3 days.' }
-  ];
-  function botAsk(text){
-    const box = $('botMessages');
-    const u = el('div'); u.style.textAlign = 'right'; u.style.marginBottom = '6px'; u.innerHTML = `<small><strong>You:</strong> ${escapeHtml(text)}</small>`; box.appendChild(u);
-    const lower = (text||'').toLowerCase();
-    const found = FAQ.find(f => lower.includes(f.q.split(' ')[0]) || lower.includes(f.q));
-    const reply = found ? found.a : 'Please message us on WhatsApp for help.';
-    setTimeout(()=> { const b = el('div'); b.style.marginBottom='6px'; b.innerHTML = `<small><strong>Bot:</strong> ${escapeHtml(reply)}</small>`; box.appendChild(b); box.scrollTop = box.scrollHeight; }, 200);
-  }
-
-  // CHECKOUT & Google Form
-  function checkoutHandler(e){
-    e.preventDefault();
-    const form = e.target;
-    const name = form.name.value.trim();
-    const phone = form.phone.value.trim();
-    const address = form.address.value.trim();
-    const cart = loadCart();
-    if(!name || !phone || cart.length===0) return alert('Please enter name, phone and add at least 1 item.');
-    const total = cart.reduce((s,i)=>s + (i.price||0) * (i.qty||1), 0);
-    const orderId = 'ORD-'+Date.now();
-    const createdAt = new Date().toISOString();
-    const order = { orderId, name, phone, address, cart, total, createdAt };
-
-    // save to local owner storage
-    const orders = loadOrders(); orders.push(order); localStorage.setItem(LS_ORDERS_KEY, JSON.stringify(orders));
-
-    // post to google form (no-cors blind POST)
-    postToGoogleForm(order);
-
-    // open whatsapp to confirm
-    const items = cart.map(i=>`${i.name} x${i.qty}`).join(', ');
-    const msg = `Hi Millatte team! I placed an order (ID: ${orderId}).\\nName: ${name}\\nPhone: ${phone}\\nAddress: ${address}\\nTotal: ₹${total}\\nItems: ${items}`;
-    const wa = `https://wa.me/${BUSINESS_WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
-
-    localStorage.removeItem(LS_CART_KEY);
-    renderCart(); renderRecs(); updateDownloadLink();
-    window.open(wa,'_blank');
-    alert('Order created — opening WhatsApp for confirmation');
-  }
-
-  function postToGoogleForm(order){
-    if(!GOOGLE_FORM_URL) return;
-    try{
-      const params = new URLSearchParams();
-      for(const key of ['orderId','name','phone','address','total','cart','createdAt']){
-        const entry = GOOGLE_FORM_FIELDS[key];
-        if(!entry) continue;
-        let value = order[key];
-        if(key==='cart') value = JSON.stringify(order.cart.map(i=>({name:i.name,qty:i.qty,price:i.price})));
-        params.append(entry, value);
-      }
-      fetch(GOOGLE_FORM_URL, { method:'POST', body: params, mode:'no-cors' })
-        .then(()=> console.log('Posted to Google Form (attempt)'))
-        .catch(e=> console.warn('Google Form post failed', e));
-    }catch(e){ console.warn(e) }
-  }
-
-  // ORDERS CSV download
-  function loadOrders(){ try{return JSON.parse(localStorage.getItem(LS_ORDERS_KEY)||'[]')}catch(e){return []} }
-  function ordersToCSV(orders){
-    if(!orders.length) return '';
-    const header = ['orderId','name','phone','address','total','cart','createdAt']; const rows=[header.join(',')];
-    orders.forEach(o=>{
-      const cartStr = '"' + o.cart.map(i=>`${i.name} x${i.qty}`).join('; ') + '"';
-      rows.push([o.orderId, csvEscape(o.name), csvEscape(o.phone), csvEscape(o.address), o.total, cartStr, o.createdAt].join(','));
-    });
-    return rows.join('\\n');
-  }
-  function csvEscape(s){ return '"'+String(s).replace(/"/g,'""')+'"'; }
-  function updateDownloadLink(){
-    const orders = loadOrders(); const csv = ordersToCSV(orders);
-    const a = $('downloadOrders');
-    if(!csv){ a.href='#'; a.style.pointerEvents='none'; return }
-    const blob = new Blob([csv], { type:'text/csv;charset=utf-8;' }); a.href = URL.createObjectURL(blob); a.style.pointerEvents='auto';
-  }
-
-  // small utilities
-  function recordActivity(obj){ try{ const k='millatte_activity_v1'; const list=JSON.parse(localStorage.getItem(k)||'[]'); list.push({...obj,ts:new Date().toISOString()}); localStorage.setItem(k, JSON.stringify(list)); }catch(e){} }
-  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',\"'\":'&#39;'}[m])) }
-  function showToast(msg){ console.log(msg) }
-
-  // init
-  document.addEventListener('DOMContentLoaded', ()=>{
-    renderProducts();
-    renderCart();
-    renderRecs();
-    updateDownloadLink();
-
-    $('botSend').addEventListener('click', ()=>{ const v=$('botInput').value.trim(); if(v){ botAsk(v); $('botInput').value=''; }});
-    $('botInput').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); $('botSend').click(); }});
-    $('checkoutForm').addEventListener('submit', checkoutHandler);
-
-    // shop now scroll
-    $('shopNow').addEventListener('click', ()=> window.scrollTo({ top: document.querySelector('.wrap').offsetTop-10, behavior:'smooth' }));
-    $('learnMore').addEventListener('click', ()=> alert('Millatte — made with real ingredients. More story & visuals coming soon!'));
-
-    // refresh download link regularly
-    setInterval(updateDownloadLink, 1500);
-    recordActivity({ event:'visit_home' });
+function renderProducts(){
+  const grid = $('productGrid');
+  grid.innerHTML = '';
+  PRODUCTS.forEach(p=>{
+    const card = el('div','product');
+    const thumb = el('div','thumb');
+    const img = document.createElement('img');
+    img.src = `https://source.unsplash.com/900x700/?${encodeURIComponent(p.query)}`;
+    img.alt = p.name;
+    thumb.appendChild(img);
+    const body = el('div','p-body');
+    body.innerHTML = `<div class="p-title">${p.name}</div><div class="p-tag">${p.tagline}</div>`;
+    const bottom = el('div','p-row');
+    bottom.innerHTML = `<div class="price">${currency(p.price)}</div><div><button class="btn" data-id="${p.id}">Add</button></div>`;
+    body.appendChild(bottom);
+    card.appendChild(thumb); card.appendChild(body);
+    grid.appendChild(card);
   });
-  </script>
+  grid.querySelectorAll('button[data-id]').forEach(b=>{
+    b.addEventListener('click', ()=> {
+      const id = b.getAttribute('data-id');
+      const prod = PRODUCTS.find(x=>x.id===id);
+      addToCart(Object.assign({}, prod, { tags: prod.query.split(',') }));
+    });
+  });
+}
+
+/* ---------------------------
+   LIFE-CYCLE SECTIONS (parallax feel)
+   --------------------------- */
+const LIFE_STEPS = [
+  { title: 'Farm & Harvest', subtitle: 'Matcha starts at tea farms — hand-picked leaves.', img: 'https://source.unsplash.com/1600x900/?tea,field' },
+  { title: 'Drying & Sorting', subtitle: 'Leaves are dried & sorted carefully.', img: 'https://source.unsplash.com/1600x900/?tea,processing' },
+  { title: 'Stone Grinding', subtitle: 'Stone-ground into the fine ceremonial matcha powder.', img: 'https://source.unsplash.com/1600x900/?matcha,grinding' },
+  { title: 'Bottling & Quality', subtitle: 'Bottled with care to preserve freshness.', img: 'https://source.unsplash.com/1600x900/?bottling,plant' },
+  { title: 'People Enjoying', subtitle: 'Delivered to you — fresh, delicious, energizing.', img: 'https://source.unsplash.com/1600x900/?people,drinking' }
+];
+
+function renderLifeCycle(){
+  const cont = $('lifeCycle');
+  cont.innerHTML = '';
+  LIFE_STEPS.forEach((s, i)=>{
+    const step = el('section','step');
+    step.style.backgroundImage = `url(${s.img})`;
+    const inner = el('div','inner');
+    inner.innerHTML = `<h2 style="margin:0">${s.title}</h2><p style="margin:8px 0 0">${s.subtitle}</p>`;
+    step.appendChild(inner);
+    cont.appendChild(step);
+  });
+}
+
+/* ---------------------------
+   CART functions
+   --------------------------- */
+function loadCart(){ try{ return JSON.parse(localStorage.getItem(LS_CART_KEY)||'[]') }catch(e){return []} }
+function saveCart(cart){ localStorage.setItem(LS_CART_KEY, JSON.stringify(cart)); renderCart(); renderRecs(); updateDownloadLink(); }
+function addToCart(prod){
+  const cart = loadCart();
+  const idx = cart.findIndex(i=>i.id===prod.id);
+  if(idx>=0) cart[idx].qty += 1; else cart.push(Object.assign({}, prod, { qty:1 }));
+  saveCart(cart); recordActivity({event:'add_to_cart', productId: prod.id});
+}
+function removeFromCart(id){
+  let cart = loadCart(); cart = cart.filter(i=>i.id!==id); saveCart(cart);
+}
+function renderCart(){
+  const cart = loadCart(); const list = $('cartList');
+  $('cart-count') && ($('cart-count').innerText = 'Cart: '+cart.reduce((s,i)=>s+i.qty,0));
+  list.innerHTML = cart.length ? '' : '<div class="muted">Cart is empty</div>';
+  if(cart.length){
+    cart.forEach(item=>{
+      const d = el('div','cart-item');
+      d.innerHTML = `<div><div style="font-weight:700">${item.name}</div><div class="muted">${item.qty} × ${currency(item.price)}</div></div>
+        <div><button style="background:transparent;border:none;color:#ef4444;cursor:pointer" data-id="${item.id}">Remove</button></div>`;
+      list.appendChild(d);
+    });
+    list.querySelectorAll('button[data-id]').forEach(b=>b.addEventListener('click', ()=> removeFromCart(b.getAttribute('data-id'))));
+  }
+}
+
+/* ---------------------------
+   RECOMMENDATIONS (basic)
+   --------------------------- */
+function renderRecs(){
+  const recC = $('recList'); recC.innerHTML = '';
+  const cart = loadCart(); let recs = [];
+  if(cart.length){
+    const tags = new Set(cart.flatMap(c=>c.tags||[]));
+    recs = PRODUCTS.filter(p => p.tags && p.tags.some(t=>tags.has(t)) && !cart.find(c=>c.id===p.id));
+  }
+  if(!recs.length) recs = PRODUCTS.slice(0,3);
+  recs.forEach(r=>{
+    const rEl = el('div','rec'); rEl.innerHTML = `<div style="font-weight:700">${r.name}</div><div class="muted">${currency(r.price)}</div>`; recC.appendChild(rEl);
+  });
+}
+
+/* ---------------------------
+   BOT (keyword match)
+   --------------------------- */
+const FAQ = [
+  { q: 'is this sugar free', a: 'Yes — our products are sugar-free or low-cal where noted.' },
+  { q: 'do you deliver', a: 'We deliver across India; orders are confirmed on WhatsApp.' },
+  { q: 'how long matcha lasts', a: 'Unopened bottles: 6 months. Opened: refrigerate and consume within 3 days.' }
+];
+function botAsk(text){
+  const box = $('botMessages'); const u = el('div'); u.style.textAlign='right'; u.style.marginBottom='6px'; u.innerHTML=`<small><strong>You:</strong> ${escapeHtml(text)}</small>`; box.appendChild(u);
+  const lower = (text||'').toLowerCase(); const found = FAQ.find(f => lower.includes(f.q.split(' ')[0]) || lower.includes(f.q));
+  const reply = found ? found.a : 'Please message us on WhatsApp for help.';
+  setTimeout(()=> { const b = el('div'); b.style.marginBottom='6px'; b.innerHTML = `<small><strong>Bot:</strong> ${escapeHtml(reply)}</small>`; box.appendChild(b); box.scrollTop = box.scrollHeight; }, 200);
+}
+
+/* ---------------------------
+   CHECKOUT: Google Form + WhatsApp (robust)
+   --------------------------- */
+function checkoutHandler(e){
+  e.preventDefault();
+  const f = e.target; const name = f.name.value.trim(), phone = f.phone.value.trim(), address = f.address.value.trim();
+  const cart = loadCart();
+  if(!name || !phone || cart.length===0) return alert('Please enter name, phone and add at least 1 item.');
+  const total = cart.reduce((s,i)=>s + (i.price||0)*(i.qty||1),0);
+  const orderId = 'ORD-'+Date.now(); const createdAt = new Date().toISOString();
+  const order = { orderId, name, phone, address, cart, total, createdAt };
+
+  // save locally (owner)
+  const orders = loadOrders(); orders.push(order); localStorage.setItem(LS_ORDERS_KEY, JSON.stringify(orders));
+
+  // post to google form (blind)
+  postToGoogleForm(order);
+
+  // Build WhatsApp message
+  const itemsText = cart.map(i=>`${i.name} x${i.qty}`).join(', ');
+  const message = `Hi Millatte team! I placed an order (ID: ${orderId}).\nName: ${name}\nPhone: ${phone}\nAddress: ${address}\nTotal: ₹${total}\nItems: ${itemsText}`;
+  const encoded = encodeURIComponent(message);
+
+  // wa.me link (works mobile & desktop)
+  const waLink = `https://wa.me/${BUSINESS_WHATSAPP_NUMBER}?text=${encoded}`;
+  const webLink = `https://web.whatsapp.com/send?phone=${BUSINESS_WHATSAPP_NUMBER}&text=${encoded}`;
+
+  // attempt to open new window; fallbacks if blocked
+  const newWin = window.open(waLink, '_blank');
+  if(!newWin || newWin.closed || typeof newWin.closed=='undefined'){
+    // popup blocked — show fallback modal-like alert with clickable links
+    const msg = `If WhatsApp did not open automatically, click the link below to confirm your order:\n\nMobile/Any: ${waLink}\nDesktop (WhatsApp Web): ${webLink}`;
+    // provide clickable fallback on page
+    showFallbackLinks(waLink, webLink);
+    console.warn('Popup blocked; user must click fallback link.');
+  }
+  // clear cart & UI updates
+  localStorage.removeItem(LS_CART_KEY); renderCart(); renderRecs(); updateDownloadLink();
+  alert('Order saved locally and Google Form attempted. WhatsApp should open (check popups).');
+}
+
+function showFallbackLinks(wa, web){
+  // simple in-page fallback - create a top sticky box with clickable links
+  let box = document.getElementById('waFallbackBox');
+  if(!box){
+    box = el('div'); box.id='waFallbackBox';
+    box.style.position='fixed'; box.style.right='16px'; box.style.bottom='16px'; box.style.zIndex=9999;
+    box.style.background='rgba(255,255,255,0.98)'; box.style.padding='12px'; box.style.borderRadius='12px';
+    box.style.boxShadow='0 8px 24px rgba(2,6,23,0.12)'; document.body.appendChild(box);
+  }
+  box.innerHTML = `<div style="font-weight:800;margin-bottom:6px">Confirm order on WhatsApp</div>
+    <div style="display:flex;flex-direction:column;gap:6px">
+      <a href="${wa}" target="_blank" style="padding:8px 10px;background:#25D366;color:white;border-radius:10px;text-decoration:none;text-align:center">Open WhatsApp (mobile/any)</a>
+      <a href="${web}" target="_blank" style="padding:8px 10px;background:#128C7E;color:white;border-radius:10px;text-decoration:none;text-align:center">Open WhatsApp Web (desktop)</a>
+      <div style="font-size:12px;color:#444;margin-top:6px">If the popup was blocked, click one of the links above.</div>
+    </div>`;
+}
+
+/* Google Form blind POST */
+function postToGoogleForm(order){
+  if(!GOOGLE_FORM_URL) return;
+  try{
+    const params = new URLSearchParams();
+    for(const key of ['orderId','name','phone','address','total','cart','createdAt']){
+      const entryKey = GOOGLE_FORM_FIELDS[key];
+      if(!entryKey) continue;
+      let value = order[key];
+      if(key==='cart') value = JSON.stringify(order.cart.map(i=>({name:i.name, qty:i.qty, price:i.price})));
+      params.append(entryKey, value);
+    }
+    fetch(GOOGLE_FORM_URL, { method:'POST', body: params, mode:'no-cors' })
+      .then(()=> console.log('Google Form POST attempted'))
+      .catch(e=> console.warn('Google Form POST error', e));
+  }catch(e){ console.warn('postToGoogleForm error', e) }
+}
+
+/* ---------------------------
+   ORDERS CSV (owner)
+   --------------------------- */
+function loadOrders(){ try{ return JSON.parse(localStorage.getItem(LS_ORDERS_KEY)||'[]') }catch(e){ return [] } }
+function ordersToCSV(orders){
+  if(!orders.length) return '';
+  const cols = ['orderId','name','phone','address','total','cart','createdAt']; const rows = [cols.join(',')];
+  orders.forEach(o=>{
+    const cartStr = '"' + o.cart.map(i=>`${i.name} x${i.qty}`).join('; ') + '"';
+    rows.push([o.orderId, csvEscape(o.name), csvEscape(o.phone), csvEscape(o.address), o.total, cartStr, o.createdAt].join(','));
+  });
+  return rows.join('\n');
+}
+function csvEscape(s){ return '"'+String(s).replace(/"/g,'""')+'"'; }
+function updateDownloadLink(){ const orders = loadOrders(); const csv = ordersToCSV(orders); const a = document.getElementById('downloadOrders');
+  if(!csv){ a.href='#'; a.style.pointerEvents='none'; return }
+  const blob = new Blob([csv], { type:'text/csv;charset=utf-8;' }); a.href = URL.createObjectURL(blob); a.style.pointerEvents='auto';
+}
+
+/* ---------------------------
+   ACTIVITY & UTILITIES
+   --------------------------- */
+function recordActivity(obj){ try{ const K='millatte_activity_v1'; const list = JSON.parse(localStorage.getItem(K)||'[]'); list.push({...obj, ts: new Date().toISOString()}); localStorage.setItem(K, JSON.stringify(list)); }catch(e){} }
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+/* ---------------------------
+   INIT
+   --------------------------- */
+document.addEventListener('DOMContentLoaded', ()=>{
+  renderProducts(); renderLifeCycle(); renderCart(); renderRecs(); updateDownloadLink();
+
+  $('botSend').addEventListener('click', ()=> { const v=$('botInput').value.trim(); if(!v) return; botAsk(v); $('botInput').value=''; });
+  $('botInput').addEventListener('keydown', e=> { if(e.key==='Enter'){ e.preventDefault(); $('botSend').click(); }});
+
+  $('checkoutForm').addEventListener('submit', checkoutHandler);
+  $('shopNowBtn').addEventListener('click', ()=> window.scrollTo({ top: document.querySelector('.wrap').offsetTop-10, behavior:'smooth' }));
+  $('storyBtn').addEventListener('click', ()=> window.scrollTo({ top: document.getElementById('lifeCycle').offsetTop-20, behavior:'smooth' }));
+
+  // fallback: allow clicking download even if no orders
+  updateDownloadLink();
+
+  // record visit
+  recordActivity({ event:'visit_home' });
+});
+
+</script>
+
 </body>
 </html>
+
