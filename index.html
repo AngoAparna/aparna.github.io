@@ -4,94 +4,179 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Millatte — Sugar-free Refreshments</title>
+  <meta name="description" content="Millatte — sugar-free matcha & refreshing beverages. Order via WhatsApp." />
   <style>
-    :root{ --bg:#f8fafc; --card:#ffffff; --accent:#16a34a; --muted:#64748b; --radius:12px; --shadow:0 8px 20px rgba(2,6,23,0.08); }
+    :root{
+      --accent:#16a34a;
+      --muted:#64748b;
+      --card:#ffffff;
+      --glass: rgba(255,255,255,0.10);
+      --shadow: 0 10px 30px rgba(2,6,23,0.12);
+      font-synthesis: none;
+    }
     *{box-sizing:border-box}
-    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica;background:linear-gradient(180deg,#f8fafc,#eef2ff);color:#0f172a}
-    .wrap{max-width:1100px;margin:20px auto;padding:16px}
-    header{display:flex;align-items:center;justify-content:space-between}
-    .brand{font-weight:800;font-size:20px;letter-spacing:0.2px}
-    .sub{color:var(--muted);font-size:13px}
-    .grid{display:grid;grid-template-columns:1fr 360px;gap:20px;margin-top:20px}
-    .card{background:var(--card);padding:14px;border-radius:var(--radius);box-shadow:var(--shadow)}
-    .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
-    .pimg{height:120px;border-radius:10px;background:linear-gradient(90deg,#dbeafe,#f0fdfa);display:flex;align-items:center;justify-content:center;color:#0f172a;font-weight:700}
-    .btn{background:var(--accent);color:#fff;border:none;padding:8px 10px;border-radius:8px;cursor:pointer}
-    .muted{color:var(--muted);font-size:13px}
-    .bot-messages{height:120px;overflow:auto;background:#f8fafc;padding:8px;border-radius:8px}
-    .small{font-size:13px;color:var(--muted)}
-    .cart-item{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:#04283a;
+      background:linear-gradient(180deg,#f8fafc,#eef2ff);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* HERO */
+    .hero-wrap{position:relative;overflow:hidden;height:56vh;min-height:380px;border-bottom-left-radius:28px;border-bottom-right-radius:28px}
+    .hero-video{
+      position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:brightness(0.6) saturate(1.05);
+    }
+    .hero-overlay{
+      position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:48px;gap:12px;
+      color:#fff;
+      background: linear-gradient(180deg, rgba(2,6,23,0.12), rgba(2,6,23,0.18));
+      backdrop-filter: blur(2px);
+    }
+    .logo{display:flex;gap:12px;align-items:center}
+    .logo .mark{width:54px;height:54px;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#06b6d4);display:flex;align-items:center;justify-content:center;font-weight:800;color:#fff;font-size:20px}
+    .brand{font-size:28px;font-weight:800;letter-spacing:0.2px}
+    .hero-sub{font-size:15px;color:rgba(255,255,255,0.9);max-width:60%}
+    .hero-cta{display:flex;gap:12px;margin-top:8px}
+    .btn{background:var(--accent);color:#fff;border:none;padding:12px 16px;border-radius:12px;font-weight:700;cursor:pointer;box-shadow:var(--shadow)}
+    .btn.secondary{background:transparent;border:1.5px solid rgba(255,255,255,0.14);color:#fff}
+
+    /* MAIN */
+    .wrap{max-width:1100px;margin:-64px auto 40px;padding:0 20px}
+    .grid{display:grid;grid-template-columns:1fr 360px;gap:22px}
+    @media(max-width:980px){ .grid{grid-template-columns:1fr} .hero-overlay{padding:22px} .hero-sub{max-width:100%} }
+
+    .card{background:var(--card);border-radius:14px;padding:16px;box-shadow:0 6px 22px rgba(8,21,42,0.06)}
+    .about{display:flex;gap:16px;align-items:center}
+    .about .left{flex:1}
+    .about .right{width:160px;height:120px;border-radius:12px;overflow:hidden}
+    .about .right img{width:100%;height:100%;object-fit:cover}
+
+    /* Product grid */
+    .product-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:14px}
+    .product{
+      border-radius:12px;overflow:hidden;background:linear-gradient(180deg,#fff,#fbfeff);transition:transform .18s ease, box-shadow .18s ease;
+      box-shadow:0 6px 18px rgba(6,10,28,0.05); display:flex;flex-direction:column;
+    }
+    .product:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(6,10,28,0.12)}
+    .product .thumb{height:160px;background:#f1f5f9;display:flex;align-items:center;justify-content:center}
+    .product img{width:100%;height:100%;object-fit:cover;display:block}
+    .p-body{padding:12px;flex:1;display:flex;flex-direction:column}
+    .p-title{font-weight:800;font-size:16px}
+    .p-tag{color:var(--muted);font-size:13px;margin-top:6px}
+    .p-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:10px}
+    .price{font-weight:800}
+
+    /* Sidebar */
+    .sidebar .bot{margin-bottom:14px}
+    .bot-input{display:flex;gap:8px;margin-top:8px}
+    .bot-messages{height:130px;overflow:auto;padding:8px;border-radius:10px;background:#f8fafc;border:1px solid rgba(2,6,23,0.03)}
+    .cart{margin-top:12px}
+    .cart-list{max-height:240px;overflow:auto}
+
+    /* recommendations */
+    .recs{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
+    .rec{background:linear-gradient(180deg,#fff,#f8fffb);padding:8px;border-radius:10px;box-shadow:0 6px 18px rgba(6,10,28,0.04)}
+
     .footer{margin-top:28px;text-align:center;color:#334155;font-size:13px}
-    .rec-row{display:flex;gap:8px;margin-top:8px}
-    .rec{background:#fff;padding:8px;border-radius:8px;box-shadow:0 4px 12px rgba(2,6,23,0.04)}
-    @media(max-width:880px){ .grid{grid-template-columns:1fr} .brand{font-size:18px} .grid aside{order:2} }
-    a.link{color:var(--accent);text-decoration:none}
-    .logo{display:flex;gap:8px;align-items:center}
-    .logo .dot{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#a78bfa,#60a5fa);display:flex;align-items:center;justify-content:center;color:white;font-weight:800}
-    .download-btn{display:inline-block;margin-top:8px;padding:6px 10px;background:#0ea5e9;color:#fff;border-radius:8px;text-decoration:none}
+
+    /* small UI */
+    .muted{color:var(--muted)}
+    a.download{display:inline-block;margin-top:8px;padding:8px 10px;background:#0ea5e9;color:white;border-radius:10px;text-decoration:none}
+
   </style>
 </head>
 <body>
-  <div class="wrap">
-    <header>
+  <!-- HERO with looping background video + overlay -->
+  <section class="hero-wrap">
+    <!-- sample mp4 from MDN (works reliably). Replace with a higher-res waterfall / fresh people video if you want -->
+    <video class="hero-video" autoplay muted loop playsinline>
+      <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+      <!-- Fallback image -->
+      <img src="https://images.unsplash.com/photo-1502082553048-f009c37129b9?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=60" alt="freshness">
+    </video>
+
+    <div class="hero-overlay">
       <div class="logo">
-        <div class="dot">M</div>
+        <div class="mark">M</div>
         <div>
-          <div class="brand">Millatte</div>
-          <div class="sub">Sugar-free • Refreshing • Matcha bottled</div>
+          <div style="font-weight:800;font-size:20px">Millatte</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.9)">Sugar-free • Refreshing • Bottled Matcha</div>
         </div>
       </div>
-      <div>
-        <div id="cart-count">Cart: 0</div>
-      </div>
-    </header>
 
+      <h1 style="margin:8px 0 0;font-size:34px;line-height:1.02;font-weight:900">Fresh. Sugar-free. Made for Gen-Z.</h1>
+      <p class="hero-sub">Millatte crafts crisp, sugar-free bottled matcha and refreshing drinks — taste the calm energy. Affordable. Healthy. Instant mood-lift.</p>
+
+      <div class="hero-cta">
+        <button class="btn" id="shopNow">Shop products</button>
+        <button class="btn secondary" id="learnMore">Our story</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN content -->
+  <div class="wrap">
     <div class="grid">
-      <main>
-        <div class="card">
-          <h2 style="margin:0">About Millatte</h2>
-          <p class="muted" style="margin-top:8px">Health-first beverages — sugar-free, affordable, refreshing and great taste. Try our bottled Matcha — crafted for Gen-Z energy and balance.</p>
+      <div>
+        <div class="card about">
+          <div class="left">
+            <h2 style="margin:0">Why Millatte?</h2>
+            <p class="muted">A health-forward beverage brand focused on sugar-free options, crafted matcha bottle, and refreshing natural flavours. Perfect for students, creators and anyone who wants energy without the crash.</p>
+            <ul class="muted" style="margin-top:8px">
+              <li>Zero sugar / low-cal where applicable</li>
+              <li>Affordable pricing</li>
+              <li>Refreshing taste & premium ingredients</li>
+            </ul>
+          </div>
+          <div class="right">
+            <!-- dynamic hero image (Unsplash) -->
+            <img src="https://source.unsplash.com/400x300/?matcha,drink" alt="matcha" />
+          </div>
         </div>
 
-        <div style="margin-top:14px" class="card">
+        <div class="card" style="margin-top:14px">
           <h3 style="margin:0">Products</h3>
-          <div id="products" class="product-grid" style="margin-top:12px"></div>
+
+          <!-- product grid: images pulled from Unsplash by keyword (auto) -->
+          <div class="product-grid" id="productGrid">
+            <!-- JS will populate -->
+          </div>
         </div>
 
-        <div style="margin-top:14px" class="card">
+        <div class="card" style="margin-top:14px">
           <h3 style="margin:0">Recommended for you</h3>
-          <div id="recs" class="rec-row"></div>
+          <div id="recList" class="recs"></div>
         </div>
-      </main>
+      </div>
 
-      <aside>
-        <div class="card">
+      <!-- SIDEBAR -->
+      <aside class="card sidebar">
+        <div class="bot">
           <h4 style="margin:0">Help Bot</h4>
-          <div class="bot-messages" id="botMessages" style="margin-top:8px"></div>
-          <div style="display:flex;gap:8px;margin-top:8px">
-            <input id="botInput" placeholder="Ask a question..." style="flex:1;padding:8px;border-radius:8px;border:1px solid #e6edf3" />
+          <div id="botMessages" class="bot-messages" style="margin-top:10px"></div>
+          <div class="bot-input">
+            <input id="botInput" placeholder="Ask a question (try: is this sugar free?)" style="flex:1;padding:10px;border-radius:10px;border:1px solid #eef2ff" />
             <button class="btn" id="botSend">Ask</button>
           </div>
-          <div class="small" style="margin-top:6px">Try: “is this sugar free” / “do you deliver”</div>
         </div>
 
-        <div class="card" style="margin-top:12px">
+        <div class="card" style="padding:12px">
           <h4 style="margin:0">Cart</h4>
-          <div id="cartList" style="margin-top:8px" class="small">Cart is empty</div>
+          <div id="cartList" class="cart-list muted" style="margin-top:8px">Cart is empty</div>
 
           <hr style="margin:12px 0" />
           <form id="checkoutForm">
-            <input name="name" placeholder="Name" style="width:100%;padding:8px;margin-bottom:8px;border-radius:8px;border:1px solid #e6edf3" />
-            <input name="phone" placeholder="Phone (e.g. 919XXXXXXXXX)" style="width:100%;padding:8px;margin-bottom:8px;border-radius:8px;border:1px solid #e6edf3" />
-            <textarea name="address" placeholder="Address" style="width:100%;padding:8px;margin-bottom:8px;border-radius:8px;border:1px solid #e6edf3"></textarea>
+            <input name="name" placeholder="Name" style="width:100%;padding:10px;margin-bottom:8px;border-radius:10px;border:1px solid #eef2ff" />
+            <input name="phone" placeholder="Phone (9198...)" style="width:100%;padding:10px;margin-bottom:8px;border-radius:10px;border:1px solid #eef2ff" />
+            <textarea name="address" placeholder="Address" style="width:100%;padding:10px;margin-bottom:8px;border-radius:10px;border:1px solid #eef2ff"></textarea>
             <button type="submit" class="btn" style="width:100%">Place order (WhatsApp)</button>
           </form>
-        </div>
 
-        <div class="card" style="margin-top:12px">
-          <div class="small">Owner tools</div>
-          <a id="downloadOrders" class="download-btn" href="#" download="millatte-orders.csv">Download orders CSV</a>
-          <div style="margin-top:8px" class="small">Tip: open the CSV in Excel to see orders.</div>
+          <a id="downloadOrders" class="download" href="#" download="millatte-orders.csv" style="display:block;text-align:center">Download orders CSV</a>
         </div>
       </aside>
     </div>
@@ -100,21 +185,14 @@
   </div>
 
   <script>
-  /**************************************
-   * Millatte HTML — ready to run
-   * WhatsApp number prefilled and Google Form wired (from your prefill link)
-   *
-   * Google Form mapping used:
-   * orderId -> entry.1054609344
-   * name    -> entry.1099864676
-   * phone   -> entry.2119019468
-   * address -> entry.441643550
-   * total   -> entry.1445951231
-   * cart    -> entry.1346159692
-   * createdAt -> entry.203310628
-   **************************************/
+  /******************************
+   * Millatte — interactive script
+   * - visuals: Unsplash images + sample hero video
+   * - WhatsApp + Google Form submission wired
+   ******************************/
 
-  const BUSINESS_WHATSAPP_NUMBER = "917093902898"; // your number (country code + number, no +)
+  // YOUR CONFIG (already set)
+  const BUSINESS_WHATSAPP_NUMBER = "917093902898";
   const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSeFiBBhdIaI6b2mbdn_YOBrYOTDpJp3qhhw4F_2xbwT4vYTMQ/formResponse";
   const GOOGLE_FORM_FIELDS = {
     orderId: "entry.1054609344",
@@ -126,53 +204,63 @@
     createdAt: "entry.203310628"
   };
 
-  // Products (edit if you want)
+  // Products (images load dynamically from Unsplash by keyword)
   const PRODUCTS = [
-    { id: "p_matcha_01", name: "Iced Matcha Bottle (Sugar-free)", tagline: "Silky ceremonial matcha — sugar-free and refreshing.", price: 140, tags: ["matcha","sugar-free","refreshing"] },
-    { id: "p_citrus_01", name: "Citrus Spark", tagline: "Zesty, vitamin-rich, low-cal.", price: 90, tags: ["citrus","vitamin","low-cal"] },
-    { id: "p_herbal_01", name: "Herbal Chill", tagline: "Calming herbal infusion — natural flavors.", price: 95, tags: ["herbal","calm","no-sugar"] }
+    { id: "p_matcha_01", name: "Iced Matcha Bottle", tagline: "Silky ceremonial matcha — sugar-free & calm.", price: 140, query: "matcha,bottle" },
+    { id: "p_citrus_01", name: "Citrus Spark", tagline: "Zesty, vitamin-rich & refreshing.", price: 90, query: "citrus,drink" },
+    { id: "p_herbal_01", name: "Herbal Chill", tagline: "Calming herbal infusion — natural flavors.", price: 95, query: "herbal,tea" },
+    { id: "p_mint_01", name: "Mint Breeze", tagline: "Crisp mint, zero sugar.", price: 85, query: "mint,drink" }
   ];
 
   const LS_ORDERS_KEY = "millatte_orders_v1";
   const LS_CART_KEY = "millatte_cart_v1";
 
-  function $(id){ return document.getElementById(id) }
-  function formatCurrency(n){ return "₹" + n.toFixed(0) }
+  // small helpers
+  const $ = id => document.getElementById(id);
+  function el(tag, cls, html){ const e = document.createElement(tag); if(cls) e.className = cls; if(html!=null) e.innerHTML = html; return e; }
+  function currency(n){ return "₹" + Number(n).toFixed(0) }
 
+  // render products with Unsplash images by query (auto fetch)
   function renderProducts(){
-    const container = $("products");
-    container.innerHTML = "";
+    const cont = document.getElementById("productGrid");
+    cont.innerHTML = "";
     PRODUCTS.forEach(p=>{
-      const el = document.createElement("div");
-      el.className = "card";
-      el.innerHTML = `
-        <div class="pimg">${p.name.split(" ")[0]}</div>
-        <div style="font-weight:700;margin-top:8px">${p.name}</div>
-        <div class="muted" style="margin-top:6px">${p.tagline}</div>
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px">
-          <div style="font-weight:700">${formatCurrency(p.price)}</div>
-          <button class="btn" data-id="${p.id}">Add</button>
-        </div>
-      `;
-      container.appendChild(el);
+      const card = el("div","product");
+      const thumb = el("div","thumb");
+      const img = document.createElement("img");
+      // unsplash random by keyword (good visual variety). If you prefer fixed images, replace with your hosted images.
+      img.src = `https://source.unsplash.com/800x600/?${encodeURIComponent(p.query)}`;
+      img.alt = p.name;
+      thumb.appendChild(img);
+      const body = el("div","p-body");
+      body.innerHTML = `<div class="p-title">${p.name}</div><div class="p-tag">${p.tagline}</div>`;
+      const bottom = el("div","p-bottom");
+      bottom.innerHTML = `<div class="price">${currency(p.price)}</div><div><button class="btn" data-id="${p.id}">Add</button></div>`;
+      body.appendChild(bottom);
+      card.appendChild(thumb);
+      card.appendChild(body);
+      cont.appendChild(card);
     });
-    container.querySelectorAll("button.btn").forEach(btn=>{
-      btn.addEventListener("click", ()=> {
-        const id = btn.getAttribute("data-id");
-        addToCart(PRODUCTS.find(x=>x.id===id));
+
+    // add click handlers
+    cont.querySelectorAll('button[data-id]').forEach(b=>{
+      b.addEventListener('click', ()=> {
+        const id = b.getAttribute('data-id');
+        const prod = PRODUCTS.find(x=>x.id===id);
+        addToCart(Object.assign({}, prod, { name: prod.name, price: prod.price, tags: prod.query.split(",") }));
       });
     });
   }
 
-  function loadCart(){ try{ return JSON.parse(localStorage.getItem(LS_CART_KEY) || "[]") }catch(e){ return [] } }
-  function saveCart(cart){ localStorage.setItem(LS_CART_KEY, JSON.stringify(cart)); renderCart(); renderRecs(); updateDownloadLink() }
+  // CART
+  function loadCart(){ try{ return JSON.parse(localStorage.getItem(LS_CART_KEY) || "[]") }catch(e){return []} }
+  function saveCart(cart){ localStorage.setItem(LS_CART_KEY, JSON.stringify(cart)); renderCart(); renderRecs(); updateDownloadLink(); }
   function addToCart(product){
     const cart = loadCart();
     const idx = cart.findIndex(i=>i.id===product.id);
-    if (idx >= 0) { cart[idx].qty += 1 } else { cart.push({...product, qty:1}) }
+    if(idx>=0){ cart[idx].qty += 1 } else { cart.push({...product, qty:1}) }
     saveCart(cart);
-    recordActivity({ event: "add_to_cart", productId: product.id });
-    showToast("Added to cart");
+    recordActivity({ event:'add_to_cart', productId: product.id });
   }
   function removeFromCart(id){
     let cart = loadCart();
@@ -181,178 +269,140 @@
   }
   function renderCart(){
     const cart = loadCart();
-    $("cart-count").innerText = "Cart: " + cart.reduce((s,i)=>s+i.qty,0);
-    const list = $("cartList");
-    if (!cart.length) { list.innerHTML = "<div class='muted'>Cart is empty</div>"; return }
-    list.innerHTML = "";
-    cart.forEach(item=>{
-      const d = document.createElement("div");
-      d.className = "cart-item";
-      d.innerHTML = `
-        <div>
-          <div style="font-weight:700">${item.name}</div>
-          <div class="muted">${item.qty} × ${formatCurrency(item.price)}</div>
-        </div>
-        <div>
-          <button data-id="${item.id}" style="background:transparent;border:none;color:#ef4444;cursor:pointer">Remove</button>
-        </div>
-      `;
-      list.appendChild(d);
-    });
-    list.querySelectorAll("button[data-id]").forEach(b=>{
-      b.addEventListener("click", ()=> removeFromCart(b.getAttribute("data-id")));
-    });
-  }
-
-  function renderRecs(){
-    const cart = loadCart();
-    const recContainer = $("recs");
-    recContainer.innerHTML = "";
-    let recs = [];
-    if (cart.length){
-      const tags = new Set(cart.flatMap(i=>i.tags || []));
-      recs = PRODUCTS.filter(p => p.tags && p.tags.some(t => tags.has(t)) && !cart.some(c=>c.id===p.id));
+    $('cartList').innerHTML = cart.length ? "" : "<div class='muted'>Cart is empty</div>";
+    $('cart-count').innerText = "Cart: "+cart.reduce((s,i)=>s+i.qty,0);
+    if(cart.length){
+      cart.forEach(item=>{
+        const d = el("div","cart-item");
+        d.innerHTML = `<div><div style="font-weight:700">${item.name}</div><div class="muted">${item.qty} × ${currency(item.price)}</div></div>
+          <div><button style="background:transparent;border:none;color:#ef4444;cursor:pointer" data-id="${item.id}">Remove</button></div>`;
+        $('cartList').appendChild(d);
+      });
+      $('cartList').querySelectorAll('button[data-id]').forEach(b=>b.addEventListener('click', ()=> removeFromCart(b.getAttribute('data-id'))));
     }
-    if (!recs.length) recs = PRODUCTS.slice(0,3);
-    recs.slice(0,3).forEach(r=>{
-      const el = document.createElement("div");
-      el.className = "rec";
-      el.innerHTML = `<div style="font-weight:700">${r.name}</div><div class="muted">₹${r.price}</div>`;
-      recContainer.appendChild(el);
+  }
+
+  // RECOMMENDATIONS (simple tag match)
+  function renderRecs(){
+    const recContainer = $('recList'); recContainer.innerHTML = "";
+    const cart = loadCart();
+    let recs = [];
+    if(cart.length){
+      const tags = new Set(cart.flatMap(c=>c.tags || []));
+      recs = PRODUCTS.filter(p => p.tags && p.tags.some(t=>tags.has(t)) && !cart.find(c=>c.id===p.id));
+    }
+    if(!recs.length) recs = PRODUCTS.slice(0,3);
+    recs.forEach(r=>{
+      const rEl = el('div','rec'); rEl.innerHTML = `<div style="font-weight:700">${r.name}</div><div class="muted">${currency(r.price)}</div>`;
+      recContainer.appendChild(rEl);
     });
   }
 
+  // BOT (keyword matching)
   const FAQ = [
-    { q: "is this sugar free", a: "Yes — our products are sugar-free or low-cal where noted." },
-    { q: "do you deliver", a: "We deliver across India via courier partners. You will be redirected to WhatsApp to confirm the order." },
-    { q: "how long matcha lasts", a: "Unopened bottles: 6 months. Once opened: refrigerate and consume within 3 days." }
+    { q: 'is this sugar free', a: 'Yes — our products are sugar-free or low-cal where noted.' },
+    { q: 'do you deliver', a: 'We deliver across India. After you place order we will confirm on WhatsApp.' },
+    { q: 'how long matcha lasts', a: 'Unopened bottles: 6 months. Opened: refrigerate and consume within 3 days.' }
   ];
   function botAsk(text){
-    const box = $("botMessages");
-    const userDiv = document.createElement("div");
-    userDiv.style.textAlign = "right";
-    userDiv.style.marginBottom = "6px";
-    userDiv.innerHTML = `<small><strong>You:</strong> ${escapeHtml(text)}</small>`;
-    box.appendChild(userDiv);
-    box.scrollTop = box.scrollHeight;
-    const lower = (text || "").toLowerCase();
+    const box = $('botMessages');
+    const u = el('div'); u.style.textAlign = 'right'; u.style.marginBottom = '6px'; u.innerHTML = `<small><strong>You:</strong> ${escapeHtml(text)}</small>`; box.appendChild(u);
+    const lower = (text||'').toLowerCase();
     const found = FAQ.find(f => lower.includes(f.q.split(' ')[0]) || lower.includes(f.q));
-    const reply = found ? found.a : "Sorry — please contact us on WhatsApp for help.";
-    setTimeout(()=> {
-      const botDiv = document.createElement("div");
-      botDiv.style.textAlign = "left";
-      botDiv.style.marginBottom = "6px";
-      botDiv.innerHTML = `<small><strong>Bot:</strong> ${escapeHtml(reply)}</small>`;
-      box.appendChild(botDiv);
-      box.scrollTop = box.scrollHeight;
-    }, 250);
+    const reply = found ? found.a : 'Please message us on WhatsApp for help.';
+    setTimeout(()=> { const b = el('div'); b.style.marginBottom='6px'; b.innerHTML = `<small><strong>Bot:</strong> ${escapeHtml(reply)}</small>`; box.appendChild(b); box.scrollTop = box.scrollHeight; }, 200);
   }
 
-  function checkoutHandler(ev){
-    ev.preventDefault();
-    const form = ev.target;
+  // CHECKOUT & Google Form
+  function checkoutHandler(e){
+    e.preventDefault();
+    const form = e.target;
     const name = form.name.value.trim();
     const phone = form.phone.value.trim();
     const address = form.address.value.trim();
     const cart = loadCart();
-    if (!name || !phone || cart.length===0) return alert("Please enter name, phone and add at least 1 item.");
+    if(!name || !phone || cart.length===0) return alert('Please enter name, phone and add at least 1 item.');
     const total = cart.reduce((s,i)=>s + (i.price||0) * (i.qty||1), 0);
-    const orderId = "ORD-" + Date.now();
+    const orderId = 'ORD-'+Date.now();
     const createdAt = new Date().toISOString();
     const order = { orderId, name, phone, address, cart, total, createdAt };
 
-    // save locally
-    const orders = loadOrders();
-    orders.push(order);
-    localStorage.setItem(LS_ORDERS_KEY, JSON.stringify(orders));
+    // save to local owner storage
+    const orders = loadOrders(); orders.push(order); localStorage.setItem(LS_ORDERS_KEY, JSON.stringify(orders));
 
-    // try post to Google Form
-    trySubmitToGoogleForm(order);
+    // post to google form (no-cors blind POST)
+    postToGoogleForm(order);
 
-    // build whatsapp message and open
-    const itemsText = cart.map(i => `${i.name} x${i.qty}`).join(", ");
-    const msg = `Hi Millatte team! I placed an order (ID: ${orderId}).\\nName: ${name}\\nPhone: ${phone}\\nAddress: ${address}\\nTotal: ₹${total}\\nItems: ${itemsText}`;
-    const encoded = encodeURIComponent(msg);
-    const wa = `https://wa.me/${BUSINESS_WHATSAPP_NUMBER}?text=${encoded}`;
+    // open whatsapp to confirm
+    const items = cart.map(i=>`${i.name} x${i.qty}`).join(', ');
+    const msg = `Hi Millatte team! I placed an order (ID: ${orderId}).\\nName: ${name}\\nPhone: ${phone}\\nAddress: ${address}\\nTotal: ₹${total}\\nItems: ${items}`;
+    const wa = `https://wa.me/${BUSINESS_WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
 
     localStorage.removeItem(LS_CART_KEY);
     renderCart(); renderRecs(); updateDownloadLink();
-    window.open(wa, "_blank");
-    showToast("Order created — opening WhatsApp for confirmation");
+    window.open(wa,'_blank');
+    alert('Order created — opening WhatsApp for confirmation');
   }
 
-  function trySubmitToGoogleForm(order){
-    if (!GOOGLE_FORM_URL) return;
-    try {
+  function postToGoogleForm(order){
+    if(!GOOGLE_FORM_URL) return;
+    try{
       const params = new URLSearchParams();
-      for (const key of ["orderId","name","phone","address","total","cart","createdAt"]) {
-        const entryKey = GOOGLE_FORM_FIELDS[key];
-        if (!entryKey) continue;
+      for(const key of ['orderId','name','phone','address','total','cart','createdAt']){
+        const entry = GOOGLE_FORM_FIELDS[key];
+        if(!entry) continue;
         let value = order[key];
-        if (key === "cart") value = JSON.stringify(order.cart.map(i=>({name:i.name, qty:i.qty, price:i.price})));
-        params.append(entryKey, value);
+        if(key==='cart') value = JSON.stringify(order.cart.map(i=>({name:i.name,qty:i.qty,price:i.price})));
+        params.append(entry, value);
       }
-      fetch(GOOGLE_FORM_URL, { method: "POST", body: params, mode: "no-cors" })
-        .then(()=> console.log("Posted order to Google Form (attempt)"))
-        .catch(err=> console.warn("Google Form post error:", err));
-    } catch (e) {
-      console.warn("trySubmitToGoogleForm failed", e);
-    }
+      fetch(GOOGLE_FORM_URL, { method:'POST', body: params, mode:'no-cors' })
+        .then(()=> console.log('Posted to Google Form (attempt)'))
+        .catch(e=> console.warn('Google Form post failed', e));
+    }catch(e){ console.warn(e) }
   }
 
-  function loadOrders(){ try{ return JSON.parse(localStorage.getItem(LS_ORDERS_KEY) || "[]") } catch(e) { return [] } }
+  // ORDERS CSV download
+  function loadOrders(){ try{return JSON.parse(localStorage.getItem(LS_ORDERS_KEY)||'[]')}catch(e){return []} }
   function ordersToCSV(orders){
-    if (!orders.length) return "";
-    const rows = [];
-    const header = ["orderId","name","phone","address","total","cart","createdAt"];
-    rows.push(header.join(","));
+    if(!orders.length) return '';
+    const header = ['orderId','name','phone','address','total','cart','createdAt']; const rows=[header.join(',')];
     orders.forEach(o=>{
-      const cartStr = '"' + o.cart.map(i=>`${i.name} x${i.qty}`).join("; ") + '"';
-      rows.push([o.orderId, escapeCsv(o.name), escapeCsv(o.phone), escapeCsv(o.address), o.total, cartStr, o.createdAt].join(","));
+      const cartStr = '"' + o.cart.map(i=>`${i.name} x${i.qty}`).join('; ') + '"';
+      rows.push([o.orderId, csvEscape(o.name), csvEscape(o.phone), csvEscape(o.address), o.total, cartStr, o.createdAt].join(','));
     });
-    return rows.join("\\n");
+    return rows.join('\\n');
   }
+  function csvEscape(s){ return '"'+String(s).replace(/"/g,'""')+'"'; }
   function updateDownloadLink(){
-    const orders = loadOrders();
-    const csv = ordersToCSV(orders);
-    const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-    const url = csv ? URL.createObjectURL(blob) : "";
-    const a = $("downloadOrders");
-    if (url) { a.href = url; a.style.pointerEvents = "auto"; } else { a.href = "#"; a.style.pointerEvents = "none"; }
+    const orders = loadOrders(); const csv = ordersToCSV(orders);
+    const a = $('downloadOrders');
+    if(!csv){ a.href='#'; a.style.pointerEvents='none'; return }
+    const blob = new Blob([csv], { type:'text/csv;charset=utf-8;' }); a.href = URL.createObjectURL(blob); a.style.pointerEvents='auto';
   }
 
-  function recordActivity(obj){
-    try {
-      const key = "millatte_activity_v1";
-      const list = JSON.parse(localStorage.getItem(key) || "[]");
-      list.push({ ...obj, ts: new Date().toISOString() });
-      localStorage.setItem(key, JSON.stringify(list));
-    } catch(e){}
-  }
+  // small utilities
+  function recordActivity(obj){ try{ const k='millatte_activity_v1'; const list=JSON.parse(localStorage.getItem(k)||'[]'); list.push({...obj,ts:new Date().toISOString()}); localStorage.setItem(k, JSON.stringify(list)); }catch(e){} }
+  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',\"'\":'&#39;'}[m])) }
+  function showToast(msg){ console.log(msg) }
 
-  function escapeHtml(s){ return String(s).replace(/[&<>"']/g, (m)=> ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',\"'\":'&#39;'}[m]) ) }
-  function escapeCsv(s){ if (s==null) return ""; return '"' + String(s).replace(/"/g,'""') + '"' }
-  function showToast(msg){ console.log(msg); }
-
-  document.addEventListener("DOMContentLoaded", ()=>{
+  // init
+  document.addEventListener('DOMContentLoaded', ()=>{
     renderProducts();
     renderCart();
     renderRecs();
     updateDownloadLink();
 
-    $("botSend").addEventListener("click", ()=> {
-      const v = $("botInput").value.trim(); if (!v) return;
-      botAsk(v);
-      $("botInput").value = "";
-    });
-    $("botInput").addEventListener("keydown", (e)=> { if (e.key === "Enter") { e.preventDefault(); $("botSend").click(); }});
+    $('botSend').addEventListener('click', ()=>{ const v=$('botInput').value.trim(); if(v){ botAsk(v); $('botInput').value=''; }});
+    $('botInput').addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); $('botSend').click(); }});
+    $('checkoutForm').addEventListener('submit', checkoutHandler);
 
-    $("checkoutForm").addEventListener("submit", checkoutHandler);
+    // shop now scroll
+    $('shopNow').addEventListener('click', ()=> window.scrollTo({ top: document.querySelector('.wrap').offsetTop-10, behavior:'smooth' }));
+    $('learnMore').addEventListener('click', ()=> alert('Millatte — made with real ingredients. More story & visuals coming soon!'));
 
-    window.addEventListener("storage", ()=> updateDownloadLink());
-    setInterval(updateDownloadLink, 2000);
-
-    recordActivity({ event: "visit_home" });
+    // refresh download link regularly
+    setInterval(updateDownloadLink, 1500);
+    recordActivity({ event:'visit_home' });
   });
   </script>
 </body>
